@@ -8,7 +8,7 @@ const redisConfig = {
   db: 0
 }
 
-exports.keys = 'qtuminfo-api'
+exports.keys = 'borshinfo-api'
 
 exports.security = {
   csrf: {enable: false}
@@ -36,7 +36,7 @@ exports.ratelimit = {
 exports.io = {
   redis: {
     ...redisConfig,
-    key: 'qtuminfo-api-socket.io'
+    key: 'borshinfo-api-socket.io'
   },
   namespace: {
     '/': {connectionMiddleware: ['connection']}
@@ -45,24 +45,24 @@ exports.io = {
 
 exports.sequelize = {
   dialect: 'mysql',
-  database: 'qtum_mainnet',
+  database: 'borsh_mainnet',
   host: 'localhost',
   port: 3306,
-  username: 'qtum',
+  username: 'borsh',
   password: ''
 }
 
-exports.qtum = {
+exports.borsh = {
   chain: 'mainnet'
 }
 
-exports.qtuminfo = {
-  path: path.resolve('..', 'qtuminfo'),
+exports.borshinfo = {
+  path: path.resolve('..', 'borshinfo'),
   port: 3001,
   rpc: {
     protocol: 'http',
     host: 'localhost',
-    port: 3889,
+    port: 9849,
     user: 'user',
     password: 'password'
   }
