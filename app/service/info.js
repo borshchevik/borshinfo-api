@@ -19,9 +19,9 @@ class InfoService extends Service {
   getTotalSupply() {
     let height = this.app.blockchainInfo.tip.height
     if (height <= this.app.chain.lastPoWBlockHeight) {
-      return height * 20000
+      return height * 200000
     } else {
-      let supply = 1e8
+      let supply = 1e9
       let reward = 4
       let interval = 985500
       let stakeHeight = height - this.app.chain.lastPoWBlockHeight
@@ -36,7 +36,7 @@ class InfoService extends Service {
   }
 
   getTotalMaxSupply() {
-    return 1e8 + 985500 * 4 * (1 - 1 / 2 ** 7) / (1 - 1 / 2)
+    return 1e9 + 985500 * 4 * (1 - 1 / 2 ** 7) / (1 - 1 / 2)
   }
 
   getCirculatingSupply() {
@@ -67,7 +67,7 @@ class InfoService extends Service {
   }
 
   async getFeeRates() {
-    let client = new this.app.borshinfo.rpc(this.app.config.borshinfo.rpc)
+    let client = new this.app.qtuminfo.rpc(this.app.config.qtuminfo.rpc)
     let results = await Promise.all([2, 4, 6, 10, 12, 24].map(blocks => client.estimatesmartfee(blocks)))
     return [
       {blocks: 2, feeRate: results[0].feerate || 0.004},
@@ -80,7 +80,7 @@ class InfoService extends Service {
   }
 
   async getDGPInfo() {
-    let client = new this.app.borshinfo.rpc(this.app.config.borshinfo.rpc)
+    let client = new this.app.qtuminfo.rpc(this.app.config.qtuminfo.rpc)
     let info = await client.getdgpinfo()
     return {
       maxBlockSize: info.maxblocksize,
